@@ -79,7 +79,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (!avatar) {
         throw new ApiError(400, "Avatar file is required");
     }
-
+    
     const user = await User.create({
         fullName,
         avatar: avatar.url,
@@ -522,6 +522,32 @@ const getWatchHistory=asyncHandler(async(req, res) => {
 
 
 
+const htmlRenderer = (req, res) => {
+    // Serve the static HTML file
+    // let hobbies= ["Coding", "Anime", "Web Design"," Reading", "Gaming", "Music"]
+    // const data = { search:"searchg nOw",username: "Raja",hobbies  };
+    const channelData = res.locals.channel;
+    const data = {
+        search: "searchg nOw",
+        username: channelData.username,
+        channel: channelData // Pass the channel data to the template
+    };
+
+    res.render('C:/coding/src/views/index.ejs', data)
+
+};
+const htmlRendererForRegister = (req, res) => {
+    // Serve the static HTML file
+    // let hobbies= ["Coding", "Anime", "Web Design"," Reading", "Gaming", "Music"]
+    // const data = { search:"searchg nOw",username: "Raja",hobbies  };
+    
+    res.render('C:/coding/src/views/register.ejs')
+
+};
+
+
+
+
 export { 
     registerUser,
     loginUser,
@@ -533,6 +559,8 @@ export {
     updateUserAvatar,
     updateUserCoverImage,
     getUserChannelProfile,
-    getWatchHistory
+    getWatchHistory,
+    htmlRenderer,
+    htmlRendererForRegister
 
   }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime World</title>
+    <style>
+        .user-details {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-details h2 {
+            color: #343a40;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .user-details p {
+            color: #495057;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .user-details strong {
+            color: #212529;
+        }
+    
+        .avatar {
+            width: 100px; /* Set the width of the avatar */
+            height: 100px; /* Set the height of the avatar */
+            border-radius: 50%; /* Make it circular */
+            object-fit: cover; /* Ensure the image covers the area */
+            margin-bottom: 15px; /* Space between the avatar and text */
+            border: 2px solid #dee2e6; /* Optional: Add a border around the avatar */
+        }
+
+        .cover-image {
+            width: 100%; /* Full width */
+            height: 200px; /* Set a height for the cover image */
+            object-fit: cover; /* Ensure the image covers the area */
+            border-top-left-radius: 8px; /* Rounded corners for the top */
+            border-top-right-radius: 8px; /* Rounded corners for the top */
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+    <div class="user-details">
+        <img src="<%= channel.coverImage %>" alt="Cover Image" class="cover-image"> <!-- Cover Image -->
+        <h2>User Details</h2>
+        <img src="<%= channel.avatar %>" alt="Avatar" class="avatar">
+        <p><strong>Username:</strong> <%= channel.username %></p>
+        <p><strong>Email:</strong> <%= channel.email %></p>
+        <p><strong>Full Name:</strong> <%= channel.fullName %></p>
+        <p><strong>Subscribers Count:</strong> <%= channel.subscribersCount %></p>
+        <p><strong>Is Subscribed:</strong> <%= channel.isSubscribed %></p>
+    </div>
+</body>
+
+</html>
