@@ -25,30 +25,25 @@ router
             {
                 name: "thumbnil",
                 maxCount: 1,
-            },
+            }
             
         ]),
         publishAVideo
     );
 
-// router.route("/video").post( upload.fields([
-//     {
-//         name: "videoFile",
-//         maxCount: 1,
-//     },
-//     {
-//         name: "thumbnail",
-//         maxCount: 1,
-//     },
-    
-// ]),
-// publishAVideo)
+
        
 router
     .route("/:videoId")
     .get(getVideoById)
     .delete(deleteVideo)
-    .patch(upload.single("thumbnail"), updateVideo);
+    .patch(upload.fields([
+    
+        {
+            name: "thumbnil",
+            maxCount: 1,
+        }
+    ]), updateVideo);
 
 router.route("/toggle/publish/:videoId").patch(togglePublishStatus);
 
