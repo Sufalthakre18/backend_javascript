@@ -100,12 +100,13 @@ const publishAVideo = asyncHandler(async (req, res) => {
 })
 
 const getVideoById = asyncHandler(async (req, res) => {
-    const { videoId } = req.params
+    const { videoId } = req.video
+
     //TODO: get video by id
     const video = await Video.aggregate([
         {
             $match: {
-                _id: mongoose.Types.ObjectId(videoId),
+                _id: new mongoose.Types.ObjectId(videoId),
                 pipeline: [
                     {
                         $project: {
@@ -115,6 +116,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                             videoFile: 1,
                             duration: 1,
                             owner: 1,
+                            views:1,
                             createdAt: 1,
                             updatedAt: 1
                         }

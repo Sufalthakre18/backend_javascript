@@ -30,16 +30,23 @@ const getChannelStats = asyncHandler(async (req, res) => {
         liked: true // Assuming a "liked" boolean field exists
     });
 
+    // 4. Total Views (sum of views from all videos)
+    const totalViews = (await Video.aggregate([
+        { $match: { owner: new mongoose.Types.ObjectId(userId) } },
+        { $group: { _id: null, totalViews: { $sum: "$views" } } }
+    ]))[0]?.totalViews || 0;
+
     return res.status(200).json(
-        new ApiResponse(200,"Your dashboard fetched successfullly",{
+        new ApiResponse(200, "Your dashboard fetched successfullly", {
             totalVideos,
             totalSubs,
             totalLikes,
-            totalsubscriber:totalSubs.length,
-            totalvideos:totalVideos.length
+            totalViews,
+            totalsubscriber: totalSubs.length,
+            totalvideos: totalVideos.length
         })
     )
-        
+
 })
 
 
@@ -56,6 +63,8 @@ const getChannelVideos = asyncHandler(async (req, res) => {
         new ApiResponse(200, "all videos fetched successfully for channel", { videos, totalVideos: videos.length })
     )
 })
+
+
 
 export {
     getChannelStats,
